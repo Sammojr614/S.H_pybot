@@ -15,6 +15,7 @@ class randNumb(commands.Cog):
     async def randNumb(self,ctx, args):
         embed = discord.Embed(title="Random Number Generator", color=0x56B9CD)
         randNumbe = random.randint(0, int(args))
+        await ctx.message.delete()
         embed.add_field(name="__Set Max__", value=f"``{args}``", inline=False)
         embed.add_field(name="__Generated Number__", value=f"``{randNumbe}``", inline=False)
         embed.set_footer(text=ver)

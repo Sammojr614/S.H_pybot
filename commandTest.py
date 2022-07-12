@@ -13,7 +13,9 @@ class TestCommand(commands.Cog):
         self.bot = bot
     @commands.command()
     async def test(self, ctx):
-        embed = discord.Embed(title="Test Dialog",color=0x56B9CD)
+        embed = discord.Embed(title="Test Dialog",description="For Testing Command Concepts or Command Funcitons",color=0x56B9CD)
+        embed.add_field(name="__What's being Tested__", value="``Testing Deleting The Author Message``")
         embed.set_footer(text=ver)
         await ctx.send(embed=embed)
+        await ctx.message.delete()
 
