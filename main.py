@@ -29,6 +29,7 @@ async def on_ready():
 @bot.event
 async def on_ready():
     print(f"{bot.user} Has Connected to Discord!")
+    await bot.change_presence(activity=discord.Game(name="Crusading Isles Beta"))
 try:
 
     # Testing Command
