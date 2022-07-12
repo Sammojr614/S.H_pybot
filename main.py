@@ -43,12 +43,15 @@ try:
         randNumbe = random.randint(0, int(args))
         response = randNumbe
         await ctx.send(response)
+
+    
     #Dm Command
     @bot.command(pass_context=True)
     async def dm(ctx,user: discord.User,*,message=None):
         message = message or "This message was Sent Via DM "
         await user.send(message)
 
+    #Our Help Command, Needs Updating every time we create a new command
     @bot.command(name = 'help')
     async def help(ctx):
         embed = discord.Embed(title="Help Menu",describe="The Help list for all of my Commands",color=0x56B9CD)
@@ -56,6 +59,8 @@ try:
         embed.add_field(name="randNumb [value]", value="Random Number Generator with [value] being the max", inline=False)
         embed.set_footer(text=f"Ver {ver}")
         await ctx.send(embed=embed)
+
+        
     bot.run(TOKEN)
 except MissingRequiredArgument :
     user = bot.fetch_user(CREATOR_ID)
