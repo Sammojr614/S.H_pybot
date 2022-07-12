@@ -1,4 +1,7 @@
 import os
+from pydoc import describe
+from turtle import color, title
+from unicodedata import name
 
 
 import discord
@@ -11,14 +14,17 @@ from discord.ext.commands.errors import *
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+CREATOR_ID = os.getenv("CREATOR_ID ")
+ver = os.getenv("versionNumb")
 
 client = discord.Client()
-bot = commands.Bot(command_prefix="-")
+bot = commands.Bot(command_prefix="-",help_command=None)
 # Starting the Bot
 @client.event
 async def on_ready():
-    user = await client.fetch_user(530609301794848781)
+    user = await client.fetch_user(CREATOR_ID)
     await user.send("PyBot is Up and Running!")
+
 
 @bot.event
 async def on_ready():
@@ -42,9 +48,17 @@ try:
     async def dm(ctx,user: discord.User,*,message=None):
         message = message or "This message was Sent Via DM "
         await user.send(message)
+
+    @bot.command(name = 'help')
+    async def help(ctx):
+        embed = discord.Embed(title="Help Menu",describe="The Help list for all of my Commands",color=0x56B9CD)
+        embed.add_field(name="test", value="Use this command to test things", inline=False)
+        embed.add_field(name="randNumb [value]", value="Random Number Generator with [value] being the max", inline=False)
+        embed.set_footer(text=f"Ver {ver}")
+        await ctx.send(embed=embed)
     bot.run(TOKEN)
 except MissingRequiredArgument :
-    user = bot.fetch_user(530609301794848781)
+    user = bot.fetch_user(CREATOR_ID)
     user.send("``[ERROR!]``` \n __Type:__ **MissngRequiredArgument** ")
     bot.run(TOKEN)
 
