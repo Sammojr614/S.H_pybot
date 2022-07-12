@@ -1,4 +1,5 @@
 
+from code import interact
 import os
 from dotenv import load_dotenv
 
@@ -43,7 +44,8 @@ try:
 
     #Our Help Command, Needs Updating every time we create a new command
     bot.add_cog(commandHelp(bot))
-        
+    
+    #Testing Interations 
     bot.run(TOKEN)
 except MissingRequiredArgument:
     print("There was an error")
