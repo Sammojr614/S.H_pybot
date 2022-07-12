@@ -31,7 +31,7 @@ async def on_ready():
 
 @bot.event
 async def on_ready():
-    print(f"{bot.user} Has Connected to Discord!")
+    print(f"{bot.user.name} Has Connected to Discord!")
     await bot.change_presence(activity=discord.Game(name="Crusading Isles Beta"))
 try:
 
@@ -45,8 +45,7 @@ try:
     bot.add_cog(commandHelp(bot))
         
     bot.run(TOKEN)
-except MissingRequiredArgument :
-    user = bot.fetch_user(CREATOR_ID)
-    user.send("``[ERROR!]``` \n __Type:__ **MissngRequiredArgument** ")
-    bot.run(TOKEN)
-
+except MissingRequiredArgument:
+    print("There was an error")
+    
+   

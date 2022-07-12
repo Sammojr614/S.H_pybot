@@ -15,5 +15,5 @@ class commandHelp(commands.Cog):
         embed = discord.Embed(title="__Help Menu__",color=0x56B9CD)
         embed.add_field(name="test", value="``Use this command to test things``", inline=False)
         embed.add_field(name="randNumb [value]", value="``Random Number Generator with [value] being the max``", inline=False)
-        embed.set_footer(text=f"Ver {ver}")
+        embed.set_footer(text=f"{ver}")
         await ctx.send(embed=embed)

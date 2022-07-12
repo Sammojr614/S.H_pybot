@@ -1,8 +1,12 @@
-from turtle import title
-from click import pass_context
+import os
 import discord
 from discord.ext import commands
 import random
+
+from dotenv import load_dotenv
+
+load_dotenv()
+ver = os.getenv('versionNumb')
 
 class randNumb(commands.Cog):
     def __init__(self,bot):
@@ -13,5 +17,6 @@ class randNumb(commands.Cog):
         randNumbe = random.randint(0, int(args))
         embed.add_field(name="__Set Max__", value=f"``{args}``", inline=False)
         embed.add_field(name="__Generated Number__", value=f"``{randNumbe}``", inline=False)
+        embed.set_footer(text=ver)
         await ctx.send(embed=embed)
 
