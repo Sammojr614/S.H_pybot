@@ -15,6 +15,8 @@ from discord.ext.commands.errors import *
 from errorNet import CommandErrorHandler
 from test import testCommand
 from filewrite import Writefile
+from vote import callVote
+from help import helpCommand
 
 # loading some stuff from the .env file
 load_dotenv()
@@ -37,9 +39,29 @@ async def on_ready():
 
     bot.add_cog(CommandErrorHandler(bot))
 
+    bot.add_cog(helpCommand(bot))
+
     bot.add_cog(testCommand(bot))
 
     bot.add_cog(Writefile(bot))
+
+
+    bot.add_cog(callVote(bot))
+
+@bot.event
+async def on_reaction_add(reaction,user):
+    total_votes = 0
+    thumbs_up = 0
+    thumbs_down = 0
+    if user == bot.user:
+        return
+    if reaction.emoji == "\U0001F44D":
+        total_votes += 1
+        thumbs_up += 1
+    elif reaction.emoji == "\U0001F44E":
+        total_votes += 1
+        thumbs_down += 1
+
 
     
 # Testing Interations 
