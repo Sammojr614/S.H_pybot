@@ -25,18 +25,18 @@ class makeProfile(commands.Cog):
             with open('storage.json','r') as readfile:
                 indexFile = json.load(readfile)
                 for index in indexFile:
-                    if index['name'] == ctx.message.author.name:
+                    if index['nick'] == ctx.message.author.name:
                         if index['value'] == "":
-                            profileEmbed.add_field(name=f"__{index['name']}'s Profile__",value="``**It's Empty**``")
+                            profileEmbed.add_field(name=f"__{index['nick']}'s Profile__",value="``**It's Empty**``")
                         else:
-                            profileEmbed.add_field(name=f"__{index['name']}'s Profile__",value=f"``{index['value']}``")
+                            profileEmbed.add_field(name=f"__{index['nick']}'s Profile__",value=f"``{index['value']}``")
                             
                         await ctx.send(embed=profileEmbed)
         else:
             with open('storage.json','r') as readfile:
                 indexFile = json.load(readfile)
                 for index in indexFile:
-                    if index['name'] == ctx.message.author.name:
+                    if index['nick'] == ctx.message.author.name:
                         storeThis = [{"nick": ctx.message.author.name, "value": "{}".format(" ".join(args))}]
                         with open('storage.json','w') as outfile:
                             json.dump(storeThis, outfile)
