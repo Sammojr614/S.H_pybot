@@ -14,9 +14,11 @@ from discord.ext.commands.errors import *
 # Commands
 from errorNet import CommandErrorHandler
 from test import testCommand
-from filewrite import Writefile
 from vote import callVote
 from help import helpCommand
+from profile import makeProfile
+
+
 
 # loading some stuff from the .env file
 load_dotenv()
@@ -25,7 +27,9 @@ CREATOR_ID = os.getenv("CREATOR_ID ")
 ver = os.getenv("versionNumb")
 
 client = discord.Client()
-bot = commands.Bot(command_prefix="-", help_command=None)
+intents = discord.Intents.default()
+intents.members = True
+bot = commands.Bot(command_prefix="-", help_command=None,intents=intents)
 
 
 
@@ -43,10 +47,11 @@ async def on_ready():
 
     bot.add_cog(testCommand(bot))
 
-    bot.add_cog(Writefile(bot))
-
-
     bot.add_cog(callVote(bot))
+    
+    bot.add_cog(makeProfile(bot))
+
+   
 
 @bot.event
 async def on_reaction_add(reaction,user):
