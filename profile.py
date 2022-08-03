@@ -40,5 +40,9 @@ class makeProfile(commands.Cog):
                         storeThis = [{"nick": ctx.message.author.name, "value": "{}".format(" ".join(args))}]
                         with open('storage.json','w') as outfile:
                             json.dump(storeThis, outfile)
+                    else:
+                        storeThis.append(storeThis)
+                        with open('storage.json','w') as outfile:
+                            json.dump(storeThis, outfile)
                         
 

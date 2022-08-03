@@ -17,6 +17,6 @@ class helpCommand(commands.Cog):
         helpEmbed = discord.Embed(title="**__Help Menu__**",description="__A list of the Commands__",color=0x56B9CD)
         helpEmbed.add_field(name="__test__",value="```A dialog that's for testing things```",inline=False)
         helpEmbed.add_field(name="__vote__", value="```To do votes, how to use: vote [string]```", inline=False)
-        helpEmbed.add_field(name="__filewrite__",value="```writing to a file, Mainily for testing file writing, to use: filewrite [write] [string] or filewrite[read] [string]```")
+        helpEmbed.add_field(name="__profile__",value="```[W.I.P] Working Profiles for Everyone on the server! to use: profile [nothing or what you want to write]```")
         helpEmbed.set_footer(text=ver)
         await ctx.send(embed=helpEmbed)
