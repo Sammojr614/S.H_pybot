@@ -1,7 +1,8 @@
-import discord 
+import discord
 from discord.ext import commands
-from dotenv import load_dotenv
+
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 ver = os.getenv("Version")
@@ -10,12 +11,12 @@ class testCommand(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
-    @commands.command()
-    async def test(self,ctx):
-        await ctx.message.delete()
-        testEmbed = discord.Embed(title="Test Dialog", discription="For testing Stuff",color=0x56B9CD)
-        testEmbed.add_field(name="__What's Being Tested__", value="```Finding the Amount of Members```",inline=False )     
+    @commands.slash_command(description="For Testing, [DEV ONLY]")
+    async def test(self, ctx:discord.ApplicationContext):
+        testEmb = discord.Embed(title="**Testing Dialog**", description="*__For Science Porposes__*", color=0x56B9CD)
+        testEmb.add_field(name="**__What's Being Tested__**", value="```Doing Code in a Different Document```")
+        testEmb.set_footer(text=ver)
+        await ctx.respond(embed=testEmb)
 
-            
-        testEmbed.set_footer(text=ver)
-        await ctx.send(embed=testEmbed) 
+def setup(bot):
+    bot.add_cog(testCommand(bot))
