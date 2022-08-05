@@ -17,7 +17,8 @@ class profile(commands.Cog):
 
     @commands.slash_command()
     @option("write",description="Wrting your discription",required=False)
-    async def profile(self,ctx:discord.ApplicationContext,tofile:str):
+    async def profile(self,ctx:discord.ApplicationContext,write:str):
+        self.devList.clear()
         profEmb = discord.Embed(title="**__Your Profile__**", description="*__Your Work Profile__*", color=0x56B9CD)
         profEmb.set_footer(text=ver)
         if os.stat("storage.json")[stat.ST_SIZE] == 0:
@@ -35,14 +36,27 @@ class profile(commands.Cog):
                     json.dump(self.devList,outfile)
                     outfile.close()
         else:
-            if tofile is None:
-                with open('storage.json') as read:
+            if write is None:
+                with open('storage.json','r') as read:
                     file = json.load(read)
                     for user in file:
-                        if user['nick'] == ctx.message.author.nick:
+                        if user['nick'] == ctx.author.nick:
                             profEmb.add_field(name=f"**__{user['nick']}'s Profile__**", value=f"``{user['description']}``")
                             profEmb.set_author(name=user['Discord Name'])
                             await ctx.respond(embed=profEmb)
+
+            else:
+                self.devList.clear()
+                with open('storage.json','r') as read:
+                    file = json.load(read)
+                    self.devList.append(file)
+                    print(self.devList)
+                    
+                            
+                   
+                
+                            
+                                
 
 
 
