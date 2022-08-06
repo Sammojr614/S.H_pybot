@@ -32,5 +32,7 @@ bot.load_extension('vote',store=False)
 #The Profile Command
 bot.load_extension('profile', store=False)
   
+#A Meeting Reminder
+bot.load_extension('remind',store=False)
 
 bot.run(token)
