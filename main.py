@@ -35,4 +35,7 @@ bot.load_extension('profile', store=False)
 #A Meeting Reminder
 bot.load_extension('remind',store=False)
 
+#The Help command
+bot.load_extension('help', store=False)
+
 bot.run(token)

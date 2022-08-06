@@ -31,7 +31,7 @@ class profile(commands.Cog):
                 with open('profiles.json', 'w') as outfile:
                     json.dump(self.devList, outfile)
 
-    @commands.slash_command()
+    @commands.slash_command(description="Messing with Your profile")
     @option("role", description="Your role in the company", required=False)
     @option("goal", description="Wrting your sprint goal", required=False)
 
@@ -59,7 +59,13 @@ class profile(commands.Cog):
                 outfile.close()
         else:
             #So it Sends the Dialog when There's no Input
-            if goal or role is None:
+            
+                
+            #so it write's the goal
+            if goal is not None:
+                self.update("goal",ctx,goal)
+                await ctx.respond("Sprint Goal Updated", delete_after=5)
+            else:
                 with open('profiles.json', 'r') as read:
                     file = json.load(read)
                     for user in file:
@@ -74,10 +80,6 @@ class profile(commands.Cog):
                             message = await action.original_message()
                             await message.add_reaction('\U0000274C')
                             self.messsage_id = message.id
-            #so it write's the goal
-            if goal is not None:
-                self.update("goal",ctx,goal)
-                await ctx.respond("Sprint Goal Updated", delete_after=5)
             #so it Writes the Role
             if role is not None:
                 self.update('role',ctx,role)
