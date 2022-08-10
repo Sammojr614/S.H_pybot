@@ -15,6 +15,7 @@ intents.members = True
 
 bot = discord.Bot(intents=intents,command_prefix="-")
 
+from kudos import kudoGive
 
 
 #When the Bot Starts
@@ -37,5 +38,12 @@ bot.load_extension('remind',store=False)
 
 #The Help command
 bot.load_extension('help', store=False)
+
+#Links
+bot.load_extension('links',store=False)
+
+#Kudos!
+bot.load_extension('kudos',store=False)
+
 
 bot.run(token)

@@ -52,38 +52,35 @@ class profile(commands.Cog):
             for member in guild.members:
                 if role in member.roles and not member.bot:
                     self.devList.append(
-                        {'name': f"{member}", "nick": f"{member.nick}", "role": "Unassigned", "goal": "Nothing yet"})
+                        {'name': f"{member}", "nick": f"{member.nick}", "role": "Unassigned","kudos":0, "goal": "Nothing yet"})
 
             with open('profiles.json', 'w') as outfile:
                 json.dump(self.devList, outfile)
                 outfile.close()
         else:
             #So it Sends the Dialog when There's no Input
-            
-                
-            #so it write's the goal
-            if goal is not None:
-                self.update("goal",ctx,goal)
-                await ctx.respond("Sprint Goal Updated", delete_after=5)
-            else:
+            if len(ctx.unselected_options) == 2:
                 with open('profiles.json', 'r') as read:
                     file = json.load(read)
                     for user in file:
                         if user['nick'] == ctx.author.nick:
-                            profEmb.add_field(
-                                name="__Company Role__", value=f"*{user['role']}*", inline=False)
-                            profEmb.add_field(
-                                name=f"**__Sprint Goal__**", value=f"```{user['goal']}```",inline=False)
-                            profEmb.set_author(
-                                name=user['name'], icon_url=ctx.author.avatar.url)
+                            profEmb.add_field(name="__Company Role__", value=f"*{user['role']}*", inline=False)
+                            profEmb.add_field(name=f"**Kudos**",value=f"``{user['kudos']}``")
+                            profEmb.add_field(name=f"**__Sprint Goal__**", value=f"```{user['goal']}```",inline=False)
+                            profEmb.set_author(name=user['name'], icon_url=ctx.author.avatar.url)
                             action = await ctx.respond(embed=profEmb)
                             message = await action.original_message()
                             await message.add_reaction('\U0000274C')
                             self.messsage_id = message.id
-            #so it Writes the Role
-            if role is not None:
-                self.update('role',ctx,role)
-                await ctx.respond("Company Role Updated", delete_after=5)
+            else:
+                for option in ctx.selected_options:
+                    if option['name'] == 'goal':
+                        self.update('goal',ctx,goal)
+                        await ctx.respond("Sprint Goal Updated!",delete_after=3)
+                    elif option['name'] == 'role':
+                        self.update('role',ctx,role)
+                        await ctx.respond("Company Role Update!",delete_after=3)
+
     #Reactions
     @discord.Cog.listener()
     async def on_raw_reaction_add(self,payload:discord.RawReactionActionEvent):
