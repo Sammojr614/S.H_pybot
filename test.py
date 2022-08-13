@@ -47,13 +47,6 @@ class testCommand(commands.Cog):
         testEmb.add_field(name="**__What's Being Tested__**", value="```Using Buttons```")
         action = await ctx.respond(embed=testEmb, view=vi)
         message = await action.original_message()
-    
-
-            
-
-
-
-
 
 
 def setup(bot):

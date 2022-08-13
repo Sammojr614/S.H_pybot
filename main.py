@@ -15,7 +15,6 @@ intents.members = True
 
 bot = discord.Bot(intents=intents,command_prefix="-")
 
-from kudos import kudoGive
 
 
 #When the Bot Starts
